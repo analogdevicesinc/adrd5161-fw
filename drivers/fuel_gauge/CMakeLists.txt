@@ -1,0 +1,1 @@
+add_subdirectory_ifdef(CONFIG_FUEL_GAUGE_MAX17320 max17320)

@@ -1,0 +1,7 @@
+
+config FUEL_GAUGE_MAX17320
+	bool "MAX17320 fuel gauge"
+	default y
+	depends on FUEL_GAUGE && I2C
+	help
+	  Enable driver for the MAX17320 fuel gauge device.

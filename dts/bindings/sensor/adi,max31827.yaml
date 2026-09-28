@@ -1,0 +1,10 @@
+# Device tree binding for MAX31827 temperature sensor
+description: |
+    Maxim Integrated MAX31827 Temperature Sensor
+
+compatible: "adi,max31827"
+
+include: [i2c-device.yaml]
+properties:
+    reg:
+        required: true

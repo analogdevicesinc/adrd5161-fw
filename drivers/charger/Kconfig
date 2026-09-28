@@ -1,0 +1,3 @@
+if CHARGER
+	rsource "max77961/Kconfig"
+endif # CHARGER

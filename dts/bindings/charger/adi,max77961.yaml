@@ -1,0 +1,12 @@
+description: |
+  Maxim Integrated MAX77961 USB Type-C Buck-Boost Charger for 2S/3S Li-ion Batteries.
+compatible: "adi,max77961"
+
+include: [i2c-device.yaml, battery.yaml]
+properties:
+  constant_charge_current_max_microamp:
+    type: int
+    required: false
+    description: Maximum constant charge current in microamperes (e.g. 6000000 for 6A).
+  reg:
+    required: true

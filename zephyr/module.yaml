@@ -1,0 +1,7 @@
+# https://github.com/zephyrproject-rtos/zephyr/issues/27048
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    board_root: .
+    dts_root: .

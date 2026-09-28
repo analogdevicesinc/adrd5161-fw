@@ -1,0 +1,6 @@
+config CHARGER_MAX77961 
+	bool "MAX77961 Charger Driver" 
+	default y
+	depends on I2C && CHARGER 
+	help
+	  Enable support for the Maxim MAX77961 USB Type-C Buck-Boost Charger.

@@ -1,0 +1,4 @@
+
+if SENSOR
+	rsource "max31827/Kconfig"
+endif # SENSOR

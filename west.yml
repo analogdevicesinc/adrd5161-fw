@@ -1,0 +1,51 @@
+
+# manifest:
+#   remotes:
+#     - name: zephyrproject-rtos
+#       url-base: https://github.com/zephyrproject-rtos
+#     - name: analogdevicesinc
+#       url-base: https://github.com/analogdevicesinc
+#     - name: NTURacingTeam
+#       url-base: https://github.com/NTURacingTeam
+
+#   projects:
+#     - name: zephyr
+#       remote: analogdevicesinc
+#       revision: 3e934bc2553bf657b22fb59455446b4b50c3fa91
+#       import:
+#         # By using name-allowlist we can clone only the modules that are
+#         # strictly needed by the application.
+#         name-allowlist:
+#           - cmsis_6    # required by the ARM port for Cortex-M
+#           - hal_adi
+#     - name: canopennode
+#       remote: NTURacingTeam
+#       revision: 2487004b06e035efe211ee1a80e5b19a63530d78
+#       path: modules/canopennode
+#   self:
+#     path: adrd3161-fw
+
+manifest:
+  self:
+    west-commands: scripts/west-commands.yml
+  remotes:
+    - name: analogdevicesinc
+      url-base: https://github.com/analogdevicesinc/
+    - name: NTURacingTeam
+      url-base: https://github.com/NTURacingTeam
+  projects:
+    - name: zephyr
+      remote:  analogdevicesinc
+      revision: 3b8c8cb54d685472ed4b4f8e50fceef92d8405c9
+      import:
+        # By using name-allowlist we can clone only the modules that are
+        # strictly needed by the application.
+        name-allowlist:
+          - cmsis_6    # required by the ARM port for Cortex-M
+          - hal_adi
+    - name: canopennode
+      remote: NTURacingTeam
+      revision: 2487004b06e035efe211ee1a80e5b19a63530d78
+      path: modules/canopennode
+  self:
+     path: adrd5161-fw

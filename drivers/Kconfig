@@ -1,0 +1,6 @@
+
+menu "Drivers"
+rsource "fuel_gauge/Kconfig"
+rsource "charger/Kconfig"
+rsource "sensor/Kconfig"
+endmenu

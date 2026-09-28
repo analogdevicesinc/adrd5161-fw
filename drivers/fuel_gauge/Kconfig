@@ -1,0 +1,3 @@
+if FUEL_GAUGE
+	rsource "max17320/Kconfig"
+endif # FUEL_GAUGE

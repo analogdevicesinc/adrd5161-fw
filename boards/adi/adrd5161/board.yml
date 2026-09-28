@@ -1,0 +1,11 @@
+board:
+  name: adrd5161
+  full_name: ADRD5161 BMS module
+  vendor: adi
+  revision:
+    format: letter
+    default: A
+    revisions:
+    - name: A
+  socs:
+  - name: max32662

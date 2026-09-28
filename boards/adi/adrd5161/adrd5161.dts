@@ -1,0 +1,178 @@
+/dts-v1/;
+
+#include <adi/max32/max32662.dtsi>
+#include <adi/max32/max32662-pinctrl.dtsi>
+#include <zephyr/dt-bindings/gpio/adi-max32-gpio.h>
+
+/ {
+	soc {
+		sram_all: memory@20000000 {
+			compatible = "mmio-sram";
+			reg = <0x20000000 DT_SIZE_K(80)>;
+		};
+    };
+};
+
+/ {
+    model = "Analog Devices ADRD5161 BMS module";
+    compatible = "adi,adrd5161";
+
+    chosen {
+	zephyr,console = &uart0;
+	zephyr,shell-uart = &uart0;
+	zephyr,sram = &sram_all;
+	zephyr,flash = &flash0;
+	zephyr,display = &ssd1306;
+	zephyr,canbus = &can0;
+    };
+
+    aliases {
+	watchdog0 = &wdt0;
+	intmcu1 = &intmcu1;
+	intmcu2 = &intmcu2;
+	intmcu3 = &intmcu3;
+	intmcu4 = &intmcu4;
+	pfailfg = &pfailfg;
+	statchg = &statchg;
+	inoknchg = &inoknchg;
+	faultpowerpath1 = &fault_powerpath1;
+	faultpowerpath2 = &fault_powerpath2;
+	shdnpowerpath = &shdnpowerpath;
+    };
+    gpio_keys {
+	compatible = "gpio-keys";
+	intmcu1: intmcu_1 {
+		gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
+	};
+	intmcu2: intmcu_2 {
+		gpios = <&gpio0 16 GPIO_ACTIVE_LOW>;
+	};
+	intmcu3: intmcu_3 {
+		gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+	};
+	intmcu4: intmcu_4 {
+		gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+	};
+	pfailfg: pfail_fg {
+		gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
+	};
+	statchg: stat_chg {
+		gpios = <&gpio0 4 GPIO_ACTIVE_LOW>;
+	};
+	inoknchg: inokn_chg {
+		gpios = <&gpio0 3 GPIO_ACTIVE_LOW>; 
+	};
+	fault_powerpath1: fault_powerpath_1 {
+		gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
+	};
+	fault_powerpath2: fault_powerpath_2 {
+		gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
+	};
+    };
+   gpio_outputs {
+	compatible = "gpio-outputs";
+	shdnpowerpath: shdn_powerpath {
+		gpios =<&gpio0 5 GPIO_ACTIVE_LOW>; 
+   	};
+    };
+};
+
+&clk_erfo {
+    clock-frequency = < 24576000 >;
+};
+
+/* UART0 - debug (A) / TMC (B) UART */
+&uart0 {
+    pinctrl-0 = <&uart0a_tx_p0_10 &uart0a_rx_p0_11>;
+    pinctrl-names = "default";
+    current-speed = <115200>;
+    data-bits = <8>;
+    parity = "none";
+    status = "okay";
+};
+
+&i2c0 {
+	status = "okay";
+	pinctrl-0 = <&i2c0a_scl_p0_12 &i2c0a_sda_p0_13>;
+	pinctrl-names = "default";
+
+    /* GPIO extender */
+	adp5589: adp5589@34 {
+		compatible = "vnd,i2c-device";
+		status = "okay";
+		reg = <0x34>;
+	};
+
+    /* Fuel gauge. FIXME multiple I2C addresses relevant */
+	max17320: max17320@36 {
+		compatible = "adi,max17320";
+		status = "okay";
+		reg = <0x36>;
+    	};
+ 
+	max77961: max77961@69 {
+		compatible = "adi,max77961";
+		status = "okay";
+		reg = <0x69>;
+	};
+
+	max31827: max31827@5a {
+		compatible = "adi,max31827";
+		status = "okay";
+		reg = <0x5a>;
+	};
+	ssd1306: ssd1306@3c {
+		compatible = "solomon,ssd1306fb";
+		reg = <0x3c>;
+		status = "okay";
+		width = <128>;
+		height = <64>;
+		segment-offset = <0>;
+		page-offset = <0>;
+		display-offset = <0>;
+		multiplex-ratio = <63>;
+		prechargep = <0x22>;
+		com-invdir;
+		segment-remap;
+	};
+};
+
+&can0 {
+    status = "okay";
+    pinctrl-0 = <&can0b_rx_p0_6 &can0b_tx_p0_9>;
+    pinctrl-names = "default";
+    bitrate = <500000>;
+    sample-point = <850>;
+    zephyr,deferred-init;
+};
+
+&clk_ipo {
+    status = "okay";
+};
+
+&dma0 {
+    status = "okay";
+};
+
+&gpio0 {
+    status = "okay";
+};
+
+&trng {
+    status = "okay";
+};
+
+&wdt0 {
+    status = "okay";
+};
+
+&clk_ertco {
+    status = "okay";
+};
+
+/* adi-innersource: rtc
+   zephyrprojext-rtos: rtc_clock */
+/*
+&rtc {
+    status = "okay";
+};*/

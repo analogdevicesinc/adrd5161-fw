@@ -1,0 +1,6 @@
+config SENSOR_MAX31827
+	bool "MAX31827 temperature sensor"
+	default y
+	depends on SENSOR && I2C
+	help
+	  Enable driver for the MAX31827 temperature sensor.

@@ -1,0 +1,1 @@
+add_subdirectory_ifdef(CONFIG_CHARGER_MAX77961 max77961)

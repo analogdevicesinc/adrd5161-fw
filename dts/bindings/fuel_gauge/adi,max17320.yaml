@@ -1,0 +1,11 @@
+# Device tree binding for MAX17320 fuel gauge
+description: |
+    Maxim Integrated MAX17320 2S-4S ModelGauge m5 EZ Fuel Gauge
+    with Protector, Internal Self-Discharge Detection, and SHA-256 Authentication
+
+compatible: "adi,max17320"
+
+include: [i2c-device.yaml, fuel-gauge.yaml]
+properties:
+    reg:
+        required: true
